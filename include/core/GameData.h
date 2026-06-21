@@ -20,4 +20,7 @@ struct GameData
     Ball ball;
 
     GoalKeeper keeper;
+
+    GameData(const GameData&) = delete;
+    GameData& operator=(const GameData&) = delete;
 };

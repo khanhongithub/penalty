@@ -48,6 +48,8 @@ void ShootState::onEnter(
 
     data.ball.shoot(
         velocity);
+
+    std::cout << "GameData addr = " << &game.getData() << std::endl;
 }
 
 void ShootState::onExit(Game&)
