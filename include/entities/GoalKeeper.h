@@ -15,7 +15,14 @@ public:
 
     ShootZone getDirection() const;
 
+    void loadTexture(SDL_Renderer* renderer);
+
+    void destroyTexture();
+
+
 private:
+    SDL_Texture* m_texture = nullptr;
+
     ShootZone m_direction;
 
     float m_timer = 0.0f;

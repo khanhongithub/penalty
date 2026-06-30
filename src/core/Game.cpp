@@ -23,7 +23,7 @@ Game::~Game()
 bool Game::init()
 {
     srand(static_cast<unsigned>(time(nullptr)));
-    
+
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
     {
         std::cerr << "SDL init failed\n";
@@ -72,6 +72,10 @@ bool Game::init()
 
     m_data.ball.loadTexture(
     m_renderer);
+
+    m_data.keeper.loadTexture(
+    m_renderer);
+
     return true;
 }
 
@@ -152,6 +156,8 @@ void Game::shutdown()
     IMG_Quit();
 
     m_data.ball.destroyTexture();
+
+    m_data.keeper.destroyTexture();
 }
 
 SDL_Renderer* Game::getRenderer()

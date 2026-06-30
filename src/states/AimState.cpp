@@ -71,13 +71,21 @@ void AimState::update(
 
 void AimState::render(Game& game)
 {
+    std::cout << "AimState render\n";
     SDL_Renderer* renderer = game.getRenderer();
+
+    game.getTextRenderer().drawText(
+        renderer,
+        "SELECT DIRECTION",
+        450,
+        100);
 
     SDL_Rect left   = {400, 500, 100, 80};
     SDL_Rect center = {600, 500, 100, 80};
     SDL_Rect right  = {800, 500, 100, 80};
 
     SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+
     SDL_RenderDrawRect(renderer, &left);
     SDL_RenderDrawRect(renderer, &center);
     SDL_RenderDrawRect(renderer, &right);
@@ -86,23 +94,19 @@ void AimState::render(Game& game)
 
     switch (game.getData().selectedZone)
     {
-        case ShootZone::LEFT: selected = &left; break;
-        case ShootZone::CENTER: selected = &center; break;
-        case ShootZone::RIGHT: selected = &right; break;
+        case ShootZone::LEFT:
+            selected = &left;
+            break;
+
+        case ShootZone::CENTER:
+            selected = &center;
+            break;
+
+        case ShootZone::RIGHT:
+            selected = &right;
+            break;
     }
 
     SDL_SetRenderDrawColor(renderer, 255, 0, 0, 255);
     SDL_RenderDrawRect(renderer, selected);
-
-    SDL_RenderClear(renderer);
-
-    game.getHUD().render(game);
-
-    game.getTextRenderer().drawText(
-        renderer,
-        "SELECT DIRECTION",
-        450,
-        100
-    );
-    
 }

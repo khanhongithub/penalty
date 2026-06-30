@@ -1,5 +1,6 @@
 #include "states/BootState.h"
 
+#include <iostream>
 #include <memory>
 
 #include "core/Game.h"
@@ -33,12 +34,13 @@ void BootState::update(
 
 void BootState::render(Game& game)
 {
+    std::cout << "BootState render\n";
     SDL_Renderer* renderer = game.getRenderer();
     auto& tr = game.getTextRenderer();
 
     // background
     SDL_SetRenderDrawColor(renderer, 10, 20, 80, 255);
-    SDL_RenderClear(renderer);
+
 
     // title
     tr.drawText(renderer, "PENALTY SHOOTOUT", 300, 150);

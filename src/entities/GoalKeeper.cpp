@@ -1,4 +1,7 @@
+#include <iostream>
+
 #include "entities/GoalKeeper.h"
+#include "core/TextureManager.h"
 #include <cstdlib>
 
 GoalKeeper::GoalKeeper()
@@ -28,23 +31,64 @@ ShootZone GoalKeeper::getDirection() const
 
 void GoalKeeper::render(SDL_Renderer* renderer)
 {
-    SDL_Rect rect;
+    if (!m_texture)
+    {
+        return;
+    }
+
+    int x = 560;
 
     switch (m_direction)
     {
         case ShootZone::LEFT:
-            rect = {400, 300, 80, 120};
+            x = 360;
             break;
 
         case ShootZone::CENTER:
-            rect = {600, 300, 80, 120};
+            x = 560;
             break;
 
         case ShootZone::RIGHT:
-            rect = {800, 300, 80, 120};
+            x = 760;
             break;
     }
 
-    SDL_SetRenderDrawColor(renderer, 255, 200, 0, 255);
-    SDL_RenderFillRect(renderer, &rect);
+    SDL_Rect dst
+    {
+        x,
+        80,
+        180,
+        180
+    };
+
+    SDL_RenderCopy(
+        renderer,
+        m_texture,
+        nullptr,
+        &dst);
+}
+
+void GoalKeeper::loadTexture(
+    SDL_Renderer* renderer)
+{
+    m_texture =
+        TextureManager::loadTexture(
+            "assets/sprites/keeper.png",
+            renderer);
+
+    std::cout
+        << "Keeper texture = "
+        << m_texture
+        << std::endl;
+}
+
+void GoalKeeper::destroyTexture()
+{
+    if (m_texture)
+    {
+        SDL_DestroyTexture(
+            m_texture);
+
+        m_texture = nullptr;
+    }
 }
