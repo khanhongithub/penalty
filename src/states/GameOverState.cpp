@@ -27,7 +27,7 @@ void GameOverState::handleEvent(
         return;
     }
 
-    if (event.key.keysym.sym == SDLK_r)
+    if (event.key.keysym.sym == SDLK_RETURN)
     {
         auto& data = game.getData();
 
