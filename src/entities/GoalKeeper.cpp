@@ -1,72 +1,50 @@
 #include "entities/GoalKeeper.h"
-
 #include <cstdlib>
 
-void GoalKeeper::chooseDirection()
+GoalKeeper::GoalKeeper()
 {
-    int r = rand() % 3;
-
-    switch(r)
-    {
-        case 0:
-            m_direction =
-                ShootZone::LEFT;
-            break;
-
-        case 1:
-            m_direction =
-                ShootZone::CENTER;
-            break;
-
-        default:
-            m_direction =
-                ShootZone::RIGHT;
-            break;
-    }
+    reset();
 }
 
-ShootZone
-GoalKeeper::getDirection() const
+void GoalKeeper::reset()
+{
+    m_timer = 0.0f;
+
+    int r = rand() % 3;
+
+    m_direction = static_cast<ShootZone>(r);
+}
+
+void GoalKeeper::update(float dt)
+{
+    m_timer += dt;
+
+}
+
+ShootZone GoalKeeper::getDirection() const
 {
     return m_direction;
 }
 
-void GoalKeeper::render(
-    SDL_Renderer* renderer)
+void GoalKeeper::render(SDL_Renderer* renderer)
 {
-    int x = 620;
+    SDL_Rect rect;
 
-    switch(m_direction)
+    switch (m_direction)
     {
         case ShootZone::LEFT:
-            x = 450;
+            rect = {400, 300, 80, 120};
             break;
 
         case ShootZone::CENTER:
-            x = 620;
+            rect = {600, 300, 80, 120};
             break;
 
         case ShootZone::RIGHT:
-            x = 790;
+            rect = {800, 300, 80, 120};
             break;
     }
 
-    SDL_Rect rect
-    {
-        x,
-        100,
-        60,
-        120
-    };
-
-    SDL_SetRenderDrawColor(
-        renderer,
-        255,
-        0,
-        0,
-        255);
-
-    SDL_RenderFillRect(
-        renderer,
-        &rect);
+    SDL_SetRenderDrawColor(renderer, 255, 200, 0, 255);
+    SDL_RenderFillRect(renderer, &rect);
 }

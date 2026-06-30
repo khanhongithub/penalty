@@ -6,6 +6,7 @@
 
 struct GameData
 {
+    GameData() = default;
     int score = 0;
 
     int round = 1;
@@ -23,4 +24,7 @@ struct GameData
 
     GameData(const GameData&) = delete;
     GameData& operator=(const GameData&) = delete;
+
+    GameData(GameData&&) = delete;
+    GameData& operator=(GameData&&) = delete;
 };

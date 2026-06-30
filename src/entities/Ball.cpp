@@ -110,3 +110,18 @@ void Ball::render(
     
     std::cout << "Ball addr = " << this << std::endl;
 }
+
+#include "entities/Ball.h"
+
+ShootZone Ball::getZone() const
+{
+    float x = m_position.x;
+
+    if (x < 500)
+        return ShootZone::LEFT;
+
+    if (x < 700)
+        return ShootZone::CENTER;
+
+    return ShootZone::RIGHT;
+}

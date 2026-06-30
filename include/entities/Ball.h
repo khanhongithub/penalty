@@ -3,6 +3,7 @@
 #include <SDL2/SDL.h>
 
 #include "math/Vector2.h"
+#include "core/ShootZone.h"
 
 class Ball
 {
@@ -27,6 +28,8 @@ public:
     void loadTexture(SDL_Renderer* renderer);
 
     void destroyTexture();
+
+    ShootZone getZone() const;
     
 private:
 

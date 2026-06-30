@@ -1,4 +1,6 @@
 #include <iostream>
+#include <ctime>
+
 
 #include <SDL2/SDL_image.h>
 
@@ -20,6 +22,7 @@ Game::~Game()
 
 bool Game::init()
 {
+    srand(static_cast<unsigned>(time(nullptr)));
     
     if (SDL_Init(SDL_INIT_VIDEO) != 0)
     {

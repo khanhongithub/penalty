@@ -1,22 +1,22 @@
 #pragma once
 
 #include <SDL2/SDL.h>
-
 #include "core/ShootZone.h"
 
 class GoalKeeper
 {
 public:
+    GoalKeeper();
 
-    void chooseDirection();
+    void reset();
+    void update(float dt);
+
+    void render(SDL_Renderer* renderer);
 
     ShootZone getDirection() const;
 
-    void render(
-        SDL_Renderer* renderer);
-
 private:
+    ShootZone m_direction;
 
-    ShootZone m_direction =
-        ShootZone::CENTER;
+    float m_timer = 0.0f;
 };
